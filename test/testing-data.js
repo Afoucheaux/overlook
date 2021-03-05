@@ -1,4 +1,4 @@
-const customers = [
+const customersTestData = [
   {"id":1, "name": "Person One"},
   {"id":2, "name": "Person Two"},
   {"id":3, "name": "Person Three"},
@@ -11,7 +11,7 @@ const customers = [
   {"id":10, "name": "Person Ten"}
 ];
 
-const rooms = [
+const roomsTestData = [
   {"number":1,"roomType":"residential suite","bidet":true,"bedSize":"queen","numBeds":1,"costPerNight":350.50},
   {"number":2,"roomType":"suite","bidet":false,"bedSize":"full","numBeds":2,"costPerNight":475.50},
   {"number":3,"roomType":"single room","bidet":false,"bedSize":"king","numBeds":1,"costPerNight":490.75},
@@ -24,7 +24,7 @@ const rooms = [
   {"number":10,"roomType":"single room","bidet":false,"bedSize":"full","numBeds":2,"costPerNight":430.99},
 ];
 
-const bookings = [
+const bookingsTestData = [
   {"id":"5fwrgu4i7k55hl6t5","userID":1,"date":"2020/01/24","roomNumber":1,"roomServiceCharges":[]},
   {"id":"5fwrgu4i7k55hl6t6","userID":1,"date":"2020/01/10","roomNumber":2,"roomServiceCharges":[]},
   {"id":"5fwrgu4i7k55hl6t7","userID":1,"date":"2020/02/16","roomNumber":3,"roomServiceCharges":[]},
@@ -56,3 +56,8 @@ const bookings = [
   {"id":"5fwrgu4i7k55hl6te","userID":10,"date":"2020/01/19","roomNumber":9,"roomServiceCharges":[]},
   {"id":"5fwrgu4i7k55hl6tf","userID":10,"date":"2020/01/25","roomNumber":10,"roomServiceCharges":[]},
 ];
+
+
+export default bookingsTestData;
+export default roomsTestData;
+export default customersTestData;
