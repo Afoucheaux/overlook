@@ -21,7 +21,7 @@ const roomsTestData = [
   {"number":7,"roomType":"junior suite","bidet":false,"bedSize":"king","numBeds":2,"costPerNight":495.50},
   {"number":8,"roomType":"single room","bidet":false,"bedSize":"queen","numBeds":1,"costPerNight":375.55},
   {"number":9,"roomType":"residential suite","bidet":false,"bedSize":"queen","numBeds":1,"costPerNight":340.00},
-  {"number":10,"roomType":"single room","bidet":false,"bedSize":"full","numBeds":2,"costPerNight":430.99},
+  {"number":10,"roomType":"single room","bidet":false,"bedSize":"full","numBeds":2,"costPerNight":430.99}
 ];
 
 const bookingsTestData = [
@@ -54,7 +54,7 @@ const bookingsTestData = [
   {"id":"5fwrgu4i7k55hl6tc","userID":9,"date":"2020/01/30","roomNumber":7,"roomServiceCharges":[]},
   {"id":"5fwrgu4i7k55hl6td","userID":10,"date":"2020/01/31","roomNumber":8,"roomServiceCharges":[]},
   {"id":"5fwrgu4i7k55hl6te","userID":10,"date":"2020/01/19","roomNumber":9,"roomServiceCharges":[]},
-  {"id":"5fwrgu4i7k55hl6tf","userID":10,"date":"2020/01/25","roomNumber":10,"roomServiceCharges":[]},
+  {"id":"5fwrgu4i7k55hl6tf","userID":10,"date":"2020/01/25","roomNumber":10,"roomServiceCharges":[]}
 ];
 
 
