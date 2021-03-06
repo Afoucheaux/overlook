@@ -1,6 +1,6 @@
 class BookingRepo {
   constructor() {
-
+    this.allBookings = [];
   }
 }
 

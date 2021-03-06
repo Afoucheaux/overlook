@@ -34,5 +34,4 @@ describe('Booking', function() {
     expect(booking.roomServiceCharges).to.deep.equal([]);
   });
 
-
 });
