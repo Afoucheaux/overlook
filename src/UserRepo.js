@@ -4,4 +4,4 @@ class UserRepo {
   }
 }
 
-export defalt UserRepo;
+export default UserRepo;

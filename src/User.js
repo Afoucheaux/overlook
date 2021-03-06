@@ -4,4 +4,4 @@ class User {
   }
 }
 
-export defalt User;
+export default User;

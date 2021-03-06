@@ -4,4 +4,4 @@ class Booking {
   }
 }
 
-export defalt Booking;
+export default Booking;
