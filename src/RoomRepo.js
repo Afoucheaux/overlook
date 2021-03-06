@@ -4,4 +4,4 @@ class RoomRepo {
   }
 }
 
-export defalt RoomRepo;
+export default RoomRepo;

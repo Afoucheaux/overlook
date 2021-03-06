@@ -1,8 +1,8 @@
 import chai from 'chai';
 const expect = chai.expect;
-import customersTestData from './testing-data';
-import User from './User';
-import UserRepo from './UserRepo';
+import customersTestData from './user-Test-Data';
+import User from '../src/User';
+import UserRepo from '../src/UserRepo';
 
 describe('UserRepo', function() {
 

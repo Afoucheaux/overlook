@@ -4,4 +4,4 @@ class Manager {
   }
 }
 
-export defalt Manager;
+export default Manager;

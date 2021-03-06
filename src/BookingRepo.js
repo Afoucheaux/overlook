@@ -4,4 +4,4 @@ class BookingRepo {
   }
 }
 
-export defalt BookingRepo;
+export default BookingRepo;
