@@ -4,12 +4,70 @@
     <meta charset='UTF-8'>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="src/css/normalizer.css">
-    <title>Webpack Starter Kit</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@200&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@200;400&display=swap" rel="stylesheet">
+    <title>Overlook</title>
   </head>
   <body>
-    <h1>Webpack Starter Kit</h1>
-    <img src="./images/turing-logo.png" alt="turing logo" height="100px" width="100px">
-
-    <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
+    <header>
+      <section class="user-title">
+        <h2 class="name">Use name</h2>
+        <h2 class="name hidden">Manager name</h2>
+      </section>
+      <section class="page-title">
+        <h1>Welcome to Overlook Inn</h1>
+      </section>
+    </header>
+    <main >
+      <section class="login-card hidden" id="loginCard">
+        <form class="login-form">
+          <h3>login</h3>
+          <input type="text" class ="loging-input" id="userName" aria-label="add user name" placeholder="User Name">
+          <input type="text" class ="loging-input" id="password" aria-label="add user password" placeholder="Password">
+          <button type="button" name="login" id="logButton" arial-label="click to submit"></button>
+        </form>
+      </section>
+      <section class="user-dashboard">
+        <article class="search-room card">
+          <form class="user-booking-date">
+            <label for="dateInput">select a date</label>
+            </select>
+            <input type="date" class="date-input" id="dateInput" name="date" arial-label="input date" required>
+          </form>
+            <div>
+              <input type="checkbox" name="budget" id="bidet">
+              <label for="bidet">budget</label>
+            </div>
+            <div>
+              <input type="radio" name="bed" id="full" value="full">
+              <label for="full">Full</label>
+              <input type="radio" name="bed" id="queen" value="queen">
+              <label for="queen">Queen</label>
+              <input type="radio" name="bed" id="king" value="king">
+              <label for="king">King</label>
+            </div>
+            <div>
+              <input type='number' class='num-bed' id="numBed" required min='1' max='2'>
+              <label for="numBed">Select number of beds</label>
+            </div>
+            <p class="room-list hidden" id="roomList">rooms go here</p>
+            <button class="booking-submit" id="book-sub">submit</button>
+          </form>
+        </article>
+        <article class="user-history card">
+          <div>
+            <p class="use-past" id="userPast">Past Bookings</p>
+          </div>
+          <div>
+            <p class="cust-spent" id="custSpent">total customer speed</p>
+          </div>
+        </article>
+      </section>
+      <section class="footer">
+      </section>
+    </main>
   </body>
 </html>
+
+    <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
