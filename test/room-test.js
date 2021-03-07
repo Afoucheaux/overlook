@@ -44,4 +44,15 @@ describe('Room', function() {
     expect(room.costPerNight).to.equal(497.64);
   });
 
+  it('Should start with an availability of true', function() {
+    let room = new Room(roomsTestData[9]);
+    expect(room.available).to.equal(true);
+  })
+
+  it('Should be able to update availability if booked', function() {
+    let room = new Room(roomsTestData[9]);
+    room.booked();
+    expect(room.available).to.equal(false);
+  });
+
 });
