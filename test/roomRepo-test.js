@@ -64,6 +64,9 @@ describe('RoomRepo', function() {
       expect(roomRepo.filterRooms(roomRepo.allRooms, 'numBeds', 2).length).to.deep.equal(3);
     });
 
+    it('Should return the original list if keyInStr or value is undefined', function() {
+      expect(roomRepo.filterRooms(roomRepo.allRooms)).to.deep.equal(roomRepo.allRooms);
+    })
 
   });
 

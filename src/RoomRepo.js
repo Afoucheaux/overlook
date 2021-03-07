@@ -13,8 +13,12 @@ class RoomRepo {
   }
 
   filterRooms(roomList, keyInStr, value) {
-    let newList = roomList.filter(room => room[keyInStr] === value);
-    return newList;
+    if (keyInStr === undefined || value === undefined) {
+      return roomList;
+    } else {
+      let newList = roomList.filter(room => room[keyInStr] === value);
+      return newList;
+    }
   }
 
 
