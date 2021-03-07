@@ -17,7 +17,7 @@ class User {
         acc += room.costPerNight;
       return acc
     }, 0)
-    return totalSpend;
+    return totalSpend.toFixed(2);
   }
 
   addBooking(userbooking) {

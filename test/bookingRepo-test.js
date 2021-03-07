@@ -33,5 +33,4 @@ describe('BookingRepo', function() {
     expect(bookingRepo.allBookings.length).to.equal(3);
   })
 
-
 });

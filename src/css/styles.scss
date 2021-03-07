@@ -100,6 +100,14 @@ header {
   @include button(2% 15% 2% 15%, 0);
 }
 
+// ---- left card ---
+
+// ---- right card ----
+
+.user-feild {
+  overflow: auto;
+}
+
 //  ---- bottom styling ----
 
 .footer {
@@ -131,7 +139,7 @@ header {
     justify-content: center;
     background-color: $secondary-color;
     width: 100%;
-    height: 10vh;
+    height: 12vh;
   }
 
   h1 {
