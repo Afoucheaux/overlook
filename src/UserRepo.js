@@ -1,6 +1,6 @@
 class UserRepo {
   constructor() {
-
+    this.allUsers = [];
   }
 }
 
