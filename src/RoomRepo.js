@@ -3,7 +3,7 @@ class RoomRepo {
     this.allRooms = [];
   }
 
-  updateByNumber(numList, roomList) {
+  updateRoomsAvailable(numList, roomList) {
     numList.forEach(num => {
       let room = roomList.find(roomNum => roomNum.number === num);
       room.booked();
