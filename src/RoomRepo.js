@@ -12,8 +12,10 @@ class RoomRepo {
     return newList;
   }
 
-  
-
+  filterRooms(roomList, keyInStr, value) {
+    let newList = roomList.filter(room => room[keyInStr] === value);
+    return newList;
+  }
 
 
 }

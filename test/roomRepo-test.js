@@ -45,7 +45,23 @@ describe('RoomRepo', function() {
 
     it('Should be able to filter rooms by number', function() {
       const numList = [1, 2, 3, 4];
-      expect(roomRepo.filterByNumber(numList, roomRepo.allRooms).length).to.deep.equal(4)
+      expect(roomRepo.filterByNumber(numList, roomRepo.allRooms).length).to.deep.equal(4);
+    });
+
+    it('Should be able to filter rooms by bidet', function() {
+      expect(roomRepo.filterRooms(roomRepo.allRooms, 'bidet', true).length).to.deep.equal(4);
+    });
+
+    it('Should be able to filter rooms by bed size', function() {
+      expect(roomRepo.filterRooms(roomRepo.allRooms, 'bedSize', 'queen').length).to.deep.equal(4);
+    });
+
+    it('Should be able to filter rooms by type', function() {
+      expect(roomRepo.filterRooms(roomRepo.allRooms, 'roomType', 'junior suite').length).to.deep.equal(2);
+    });
+
+    it('Should be able to number of beds', function() {
+      expect(roomRepo.filterRooms(roomRepo.allRooms, 'numBeds', 2).length).to.deep.equal(3);
     });
 
 
