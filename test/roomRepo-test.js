@@ -43,10 +43,19 @@ describe('RoomRepo', function() {
       });
     });
 
-    it('Should be able to filter rooms by number', function() {
-      const numList = [1, 2, 3, 4];
-      expect(roomRepo.filterByNumber(numList, roomRepo.allRooms).length).to.deep.equal(4);
+    it('Should be able to update the rooms availablity based on its room number', function() {
+      const numList = [1];
+      roomRepo.updateByNumber(numList, roomRepo.allRooms);
+      expect(roomRepo.allRooms[0].available).to.equal(false);
     });
+
+    it('Should be able to return a list of all unbooked rooms', function() {
+      const numList = [1, 2, 3, 4];
+      roomRepo.updateByNumber(numList, roomRepo.allRooms);
+      roomRepo.filterRooms(roomRepo.allRooms, 'available', true)
+      expect(roomRepo.allRooms.length).to.deep.equal(6);
+    });
+
 
     it('Should be able to filter rooms by bidet', function() {
       expect(roomRepo.filterRooms(roomRepo.allRooms, 'bidet', true).length).to.deep.equal(4);

@@ -20,7 +20,7 @@ describe('BookingRepo', function() {
     const booking = new Booking(bookingsTestData[0]);
     bookingRepo.allBookings.push(booking);
     expect(bookingRepo.allBookings).to.deep.equal([booking]);
-  })
+  });
 
   it('Should be able to store a booking', function() {
     const bookingRepo = new BookingRepo();
@@ -31,6 +31,23 @@ describe('BookingRepo', function() {
     bookingRepo.allBookings.push(booking2);
     bookingRepo.allBookings.push(booking3);
     expect(bookingRepo.allBookings.length).to.equal(3);
-  })
+  });
+
+  describe('Booking filter', function() {
+    let bookingRepo;
+    let roomRepo;
+    beforeEach(() => {
+      bookingRepo = new BookingRepo;
+      bookingsTestData.forEach(bookingList => {
+        let booking = new Booking(bookingList);
+       bookingRepo.allBookings.push(booking);
+      });
+    });
+
+    it('Should be able to filter bookings by date and return the room numbers', function() {
+      expect(bookingRepo.filterAvailableByDate("2020/02/06", bookingRepo.allBookings)).to.deep.equal([7, 1, 6]);
+    });
+
+  });
 
 });

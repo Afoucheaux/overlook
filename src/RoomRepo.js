@@ -3,13 +3,11 @@ class RoomRepo {
     this.allRooms = [];
   }
 
-  filterByNumber(numList, roomList) {
-    let newList = [];
+  updateByNumber(numList, roomList) {
     numList.forEach(num => {
       let room = roomList.find(roomNum => roomNum.number === num);
-      newList.push(room)
+      room.booked();
     })
-    return newList;
   }
 
   filterRooms(roomList, keyInStr, value) {
