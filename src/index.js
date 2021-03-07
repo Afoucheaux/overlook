@@ -15,20 +15,59 @@ import Manager from './Manager';
 const customersUrl = 'http://localhost:3001/api/v1/customers';
 const roomsUrl = 'http://localhost:3001/api/v1/rooms';
 const bookingsUrl = 'http://localhost:3001/api/v1/bookings';
-const getCustomerData = fetch(customersUrl).then(response => response.json());
+const getCustomersData = fetch(customersUrl).then(response => response.json());
 const getRoomsData = fetch(roomsUrl).then(response => response.json());
 const getBookingsData = fetch(bookingsUrl).then(response => response.json());
 let user = null;
-let bookingData = [];
-let userData = [];
-let RoomRepo = [];
+let bookingRepo= [];
+let userRepo = [];
+let roomRepo = [];
 let todayDate = '2021/03/06';
+const headerName = document.querySelector('#headerName');
 
-function buildBookingData(getCustomerData) {
-  getCustomerData.forEach(user => {
-    userRepo.
+// ---- fetch functions and page builds ----
+
+Promise.all([getRoomsData, getBookingsData, getCustomersData])
+  .then((values) => {
+    buildRoomsData(values[0]);
+    buildBookingData(values[1]);
+    buildCustomersData(values[2]);
+    userLogIn('Leatha Ullrich', 'overlook2021');
+  })
+
+function buildRoomsData(roomsObj) {
+  roomRepo = new RoomRepo();
+  roomsObj.rooms.forEach(room => {
+    roomRepo.allRooms.push(new Room(room));
   });
 }
+
+function buildBookingData(bookingsObj) {
+  bookingRepo = new BookingRepo();
+  bookingsObj.bookings.forEach(user => {
+    bookingRepo.allBookings.push(new Booking(user));
+  });
+}
+
+function buildCustomersData(CustomersData) {
+  userRepo = new UserRepo();
+  CustomersData.customers.forEach(user => {
+    userRepo.allUsers.push(new User(user));
+  });
+}
+
+function userLogIn(name, password) {
+  const checkUser = userRepo.allUsers.find(user => user.name === name);
+  if (checkUser.password === password) {
+    user = checkUser
+    buildDashboard()
+  }
+}
+
+function buildDashboard() {
+  headerName.innerText = user.name;
+}
+
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 // import './images/turing-logo.png'
