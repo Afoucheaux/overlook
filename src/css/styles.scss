@@ -83,8 +83,22 @@ header {
 
 .search-room {
   align-items: center;
+  justify-content: space-around;
 }
 
+.user-booking-date {
+  @include card(space-around, column, 50vh, 40%);
+}
+
+.room-selector {
+  @include card(space-around, column, 50vh, 100%);
+  align-items: center;
+}
+
+.date-select {
+  font-size: 2em;
+  text-align: center;
+}
 .user-history {
   text-align: center;
 }

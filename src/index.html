@@ -30,11 +30,12 @@
       </section>
       <section class="user-dashboard">
         <article class="search-room card">
-          <form class="user-booking-date">
-            <label for="dateInput">select a date</label>
-            </select>
+          <form class="user-booking-date hidden">
+            <label for="dateInput" class="date-select">select a date</label>
             <input type="date" class="date-input" id="dateInput" name="date" arial-label="input date" required>
+            <button class="booking-submit" id="date-sub">submit</button>
           </form>
+          <form class="room-selector" id="roomSelector">
             <div>
               <input type="checkbox" name="budget" id="bidet">
               <label for="bidet">budget</label>
@@ -51,16 +52,16 @@
             </div>
             <div>
               <input type="radio" name="roomType" id="single" value="single room">
-              <label for="single">Single Room</label>
+              <label for="single">Single</label>
               <input type="radio" name="roomType" id="junior" value="junior suite">
-              <label for="junior">Junior Suite</label>
+              <label for="junior">Junior</label>
               <input type="radio" name="roomType" id="suite" value="suite">
               <label for="suite">Suite</label>
               <input type="radio" name="roomType" id="residential" value="residential suite">
-              <label for="residential">Residential Suite</label>
+              <label for="residential">Residential</label>
             </div>
             <div>
-              <input type='number' class='num-bed' id="numBed" required min='1' max='2'>
+              <input type='number' class='num-bed' id="numBed" min='1' max='2'>
               <label for="numBed">Select number of beds</label>
             </div>
             <p class="room-list hidden" id="roomList">rooms go here</p>
