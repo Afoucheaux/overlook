@@ -40,12 +40,24 @@
               <label for="bidet">budget</label>
             </div>
             <div>
+              <input type="radio" name="bed" id="twin" value="twin">
+              <label for="full">Twin</label>
               <input type="radio" name="bed" id="full" value="full">
               <label for="full">Full</label>
               <input type="radio" name="bed" id="queen" value="queen">
               <label for="queen">Queen</label>
               <input type="radio" name="bed" id="king" value="king">
               <label for="king">King</label>
+            </div>
+            <div>
+              <input type="radio" name="single room" id="single" value="single room">
+              <label for="single-room">Single Room</label>
+              <input type="radio" name="bed" id="junior" value="junior suite">
+              <label for="junior-suite">Junior Suite</label>
+              <input type="radio" name="suite" id="suite" value="suite">
+              <label for="suite">Suite</label>
+              <input type="radio" name="residential" id="residential" value="residential suite">
+              <label for="residential">Residential Suite</label>
             </div>
             <div>
               <input type='number' class='num-bed' id="numBed" required min='1' max='2'>
@@ -56,11 +68,12 @@
           </form>
         </article>
         <article class="user-history card">
-          <div>
-            <p class="use-past" id="userPast">Past Bookings</p>
+          <div class="user-feild" single size="8" name="bookings" id="userFeild">
+            <p class="user-past" id="userPast"></p>
+            <p class="booking-area" id="bookingArea"></p>
           </div>
           <div>
-            <p class="cust-spent" id="custSpent">total customer speed</p>
+            <p class="cust-spent" id="custSpent">total customer spend</p>
           </div>
         </article>
       </section>
