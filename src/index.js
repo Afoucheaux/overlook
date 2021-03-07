@@ -83,7 +83,7 @@ function displayUserBookings(array, displayElemt) {
 
 function updateCustomerSpent() {
   let spend = user.totalSpent(roomRepo);
-  custSpent.innerText =`${user.name} total $${spend}!`
+  custSpent.innerText =`${user.name} total $${spend}`
 }
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
