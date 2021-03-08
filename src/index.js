@@ -9,9 +9,7 @@ import User from './User';
 import UserRepo from './UserRepo';
 import Room from './Room';
 import RoomRepo from './RoomRepo';
-import Manager from './Manager';
 
-// const singleCustUrl = 'http://localhost:3001/api/v1/customers/<id>'
 const customersUrl = 'http://localhost:3001/api/v1/customers';
 const roomsUrl = 'http://localhost:3001/api/v1/rooms';
 const bookingsUrl = 'http://localhost:3001/api/v1/bookings';
@@ -43,18 +41,23 @@ const price = document.getElementById('price');
 const bedCount = document.getElementById('numBed');
 const bidet = document.getElementById("bidet");
 const test = document.querySelectorAll('input[type="radio"]');
-const custPick = document.getElementById("custPick");
-// ---- fetch functions and page builds ----
+const custPick = document.getElementById('custPick');
+const backDash = document.getElementById('backDash');
+const userDashboard = document.getElementById('userDashboard');
+const loginCard = document.getElementById('loginCard');
+const logBullon = document.getElementById('logButton');
+const userName = document.getElementById('userName');
+const password = document.getElementById('password');
+const dateHeader = document.getElementById('dateHeader');
+const loginFail = document.getElementById('loginFail');
 
 Promise.all([getRoomsData, getBookingsData, getCustomersData])
   .then((values) => {
     buildRoomsData(values[0]);
     buildBookingData(values[1]);
     buildCustomersData(values[2]);
-    userLogIn('Leatha Ullrich', 'overlook2021');
-  })
+})
 
-// --- function ---
 function buildRoomsData(roomsObj) {
   roomRepo = new RoomRepo();
   roomsObj.rooms.forEach(room => {
@@ -69,18 +72,40 @@ function buildBookingData(bookingsObj) {
   });
 }
 
-function buildCustomersData(CustomersData) {
+function buildCustomersData(customersData) {
   userRepo = new UserRepo();
-  CustomersData.customers.forEach(user => {
+  customersData.customers.forEach(user => {
     userRepo.allUsers.push(new User(user));
   });
 }
 
-function userLogIn(name, password) {
-  user = userRepo.allUsers.find(user => user.name === name);
-  if (user.password === password) {
+function bookRoom() {
+  let fixDate = workingDate.replaceAll("-", "/");
+  let newBooking = { "userID": user.id, "date": fixDate, "roomNumber":  currentRoom.number};
+  fetch(bookingsUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(newBooking),
+  })
+    .then(response => response.json())
+    .then(update => bookingMessage(update.newBooking))
+    .catch(error => console.log(error))
+}
+
+function userLogIn() {
+  let theUserName = userName.value
+  let theUserPassword = password.value
+  user = userRepo.allUsers.find(user => user.name === theUserName && user.password === theUserPassword);
+  if(user === null || user === undefined) {
+    loginFail.innerText =`Login failed, please try again.`;
+    return
+  } else {
+    unHide(userDashboard);
     user.findBookings(bookingRepo);
     buildDashboard();
+    hide(loginCard);
   }
 }
 
@@ -104,17 +129,20 @@ function updateCustomerSpent() {
 }
 
 function formDate(event) {
-  event.preventDefault();
   let fixDate = dateInput.value;
-  workingDate = dateInput.value;
-  hide(dateFor);
-  unHide(roomSelector);
-  let roomlist = availableRooms(roomRepo.allRooms, fixDate);
-  displayRooms(roomlist, bookingArea);
+  let dateTocheck = checkDate(fixDate);
+  if (dateTocheck === false) {
+    dateHeader.innerText = `Can not book on past dates.`
+    return
+  } else {
+    hide(dateFor);
+    unHide(roomSelector);
+    let roomlist = availableRooms(roomRepo.allRooms, fixDate);
+    displayRooms(roomlist, bookingArea);
+  }
 }
 
 function availableRooms(list, date = todaysDate) {
-  checkDate(date);
   let roomNum = bookingRepo.filterAvailableByDate(date, list);
   roomRepo.updateRoomsAvailable(roomNum, roomRepo.allRooms);
   let roomsToLoad = roomRepo.filterRooms(roomRepo.allRooms, 'available', true);
@@ -122,10 +150,21 @@ function availableRooms(list, date = todaysDate) {
   return roomsToLoad;
 }
 
+function dateStringToNum(date) {
+  let dateConvert = date.split('');
+  let numFilter = dateConvert.filter(num => num !== '-' && num !== '/');
+  let toJoin = numFilter.join('');
+  let toNumber = toJoin * 1;
+  return toNumber;
+}
+
 function checkDate(date) {
-  if (date < todaysDate) {
-    date = todaysDate;
-    workingDate = todaysDate;
+  let toNum = dateStringToNum(date);
+  let toNumTwo = dateStringToNum(todaysDate);
+  if (toNum < toNumTwo) {
+    return false;
+  } else {
+    workingDate = date;
   }
 }
 
@@ -139,16 +178,16 @@ function displayRooms(array, displayElemt) {
 
 function message(array) {
   if (array.length === 0) {
-    userBookings.innerText = `We got nothing for you!`
+    userBookings.innerText =`We got nothing for you!`
     custSpent.innerText =`Don't be so hard on us!`
   } else {
-    userBookings.innerText = `All the deals!`
+    userBookings.innerText =`All the deals!`
     custSpent.innerText =`Book today to save.`
   }
 }
 
 function formTwo() {
-  event.preventDefault();
+  // event.preventDefault();
   let checkedTags = [];
   test.forEach(tag => {
     if (tag.checked) {
@@ -172,18 +211,25 @@ function moveToBookingCard(event) {
 
 function addMainRoomMessage(room) {
     unHide(loadRoom);
-    currentNum.innerText = `Book this ${room.roomType}.`
-    currentType.innerText = `With ${room.numBeds} ${room.bedSize}.`
-    price.innerText = `For only ${room.costPerNight} a night.`
+    currentNum.innerText = `Book this ${room.roomType}.`;
+    currentType.innerText = `With ${room.numBeds} ${room.bedSize}.`;
+    price.innerText = `For only ${room.costPerNight} a night.`;
 }
 
 function bookingMessage(booking) {
-  user.bookings.push(booking)
-  currentNum.innerText = `You have reserved.`
-  currentType.innerText = `Room ${booking.roomNumber} on ${booking.date}.`
-  price.innerText = `Confirmation number ${booking.id}.`
+  hide(custPick);
+  unHide(backToDash);
+  user.bookings.push(booking);
+  currentNum.innerText = `You have reserved.`;
+  currentType.innerText = `Room ${booking.roomNumber} on ${booking.date}.`;
+  price.innerText = `Confirmation number ${booking.id}.`;
 }
 
+function startFresh(event) {
+  hide(loadRoom);
+  unHide(dateFor);
+  userLogIn(user.name, user.password);
+}
 
 function hide(element) {
   element.classList.add('hidden')
@@ -194,38 +240,17 @@ function unHide(element) {
 }
 
 // ---- Event Listeners ----
-
 dateSub.addEventListener('click', formDate);
 bookSubTwo.addEventListener('click', formTwo);
 bookingArea.addEventListener('dblclick', moveToBookingCard);
 custPick.addEventListener('click', bookRoom);
-
-function bookRoom(event) {
-event.preventDefault(event);
-  let newBooking = { "userID": user.id, "date": workingDate, "roomNumber":  currentRoom.number};
-  fetch(bookingsUrl, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(newBooking),
-  })
-    .then(response => response.json())
-    .then(update => bookingMessage(update.newBooking))
-    .catch(error => console.log(error))
-}
-
-
-
+backToDash.addEventListener('click', startFresh);
+logButton.addEventListener('click', userLogIn);
 
 // ---- nores --- {
-
-// { "userID": 48, "date": "2019/09/23", "roomNumber": 4 }
 
 
 
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 // import './images/turing-logo.png'
-
-// console.log('This is the JavaScript entry file - your code begins here.');

@@ -4,7 +4,6 @@ class User {
     this.name = customer.name;
     this.password = 'overlook2021';
     this.bookings = [];
-
   }
 
   findBookings(bookingList) {
