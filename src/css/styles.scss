@@ -123,6 +123,19 @@ header {
 
 // ---- left card ---
 
+.load-Room {
+  font-size: 1.5em;
+  @include card(space-around, column, 50vh, 100%);
+  align-items: center;
+}
+
+.cunstomer-picked {
+  @include button(2% 15% 2% 15%, 0);
+  background-color: $secondary-color;
+  box-shadow: 2px 5px 5px 2px $cardShadow-color;
+}
+
+
 // ---- right card ----
 
 .user-feild {

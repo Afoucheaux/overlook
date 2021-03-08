@@ -30,6 +30,12 @@
       </section>
       <section class="user-dashboard">
         <article class="search-room card">
+          <div class="load-Room hidden" id="loadRoom">
+            <p class="current-Num" id="currentNum"></p>
+            <p class="current-Type" id="currentType"></p>
+            <p class="price" id="price"></p>
+            <button class="cunstomer-picked" id="custPick">Book Today</button>
+          </div>
           <form class="user-booking-date" id="dateFor">
             <label for="dateInput" class="date-select">Select a Date</label>
             <input type="date" class="date-input" id="dateInput" name="date" arial-label="input date">
@@ -81,5 +87,7 @@
     </main>
   </body>
 </html>
+
+
 
     <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
