@@ -1,6 +1,11 @@
 @import 'base';
 
-
+*,
+*:after,
+*:before {
+  margin: 0;
+  padding: 0;
+}
 // --- deskTop ---
 
 // --- header ---
@@ -29,6 +34,7 @@ header {
   margin-left: 4%;
   width: 70%;
   display: flex;
+  align-items: center;
   justify-content: flex-start;
 }
 
@@ -83,8 +89,23 @@ header {
 
 .search-room {
   align-items: center;
+  justify-content: space-around;
 }
 
+.user-booking-date {
+  @include card(space-around, column, 50vh, 40%);
+  margin: 5%;
+}
+
+.room-selector {
+  @include card(space-around, column, 50vh, 100%);
+  align-items: center;
+}
+
+.date-select {
+  font-size: 2em;
+  text-align: center;
+}
 .user-history {
   text-align: center;
 }
@@ -102,10 +123,28 @@ header {
 
 // ---- left card ---
 
+.load-Room {
+  font-size: 1.5em;
+  @include card(space-around, column, 50vh, 100%);
+  align-items: center;
+}
+
+.cunstomer-picked {
+  @include button(2% 15% 2% 15%, 0);
+  background-color: $secondary-color;
+  box-shadow: 2px 5px 5px 2px $cardShadow-color;
+}
+
+
 // ---- right card ----
 
 .user-feild {
+  margin: 5%;
   overflow: auto;
+}
+
+.cust-spent {
+  margin-bottom: 2%
 }
 
 //  ---- bottom styling ----

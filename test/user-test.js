@@ -70,7 +70,7 @@ describe('User', function() {
 
   it('Should be able to see the total spent on all their books', function() {
     user.findBookings(bookingRepo);
-    expect(user.totalSpent(roomRepo)).to.equal(1326.92);
+    expect(user.totalSpent(roomRepo)).to.equal('1326.92');
   });
 
   it('Should be able to add a booking', function() {

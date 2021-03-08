@@ -30,14 +30,21 @@
       </section>
       <section class="user-dashboard">
         <article class="search-room card">
-          <form class="user-booking-date">
-            <label for="dateInput">select a date</label>
-            </select>
-            <input type="date" class="date-input" id="dateInput" name="date" arial-label="input date" required>
+          <div class="load-Room hidden" id="loadRoom">
+            <p class="current-Num" id="currentNum"></p>
+            <p class="current-Type" id="currentType"></p>
+            <p class="price" id="price"></p>
+            <button class="cunstomer-picked" id="custPick">Book Today</button>
+          </div>
+          <form class="user-booking-date" id="dateFor">
+            <label for="dateInput" class="date-select">Select a Date</label>
+            <input type="date" class="date-input" id="dateInput" name="date" arial-label="input date">
+            <button class="booking-submit" id="dateSub">submit</button>
           </form>
+          <form class="room-selector hidden" id="roomSelector">
             <div>
-              <input type="checkbox" name="budget" id="bidet">
-              <label for="bidet">budget</label>
+              <input type="checkbox" name="bidet" id="bidet" value ="bidet">
+              <label for="bidet">bidet</label>
             </div>
             <div>
               <input type="radio" name="bed" id="twin" value="twin">
@@ -51,27 +58,25 @@
             </div>
             <div>
               <input type="radio" name="roomType" id="single" value="single room">
-              <label for="single">Single Room</label>
+              <label for="single">Single</label>
               <input type="radio" name="roomType" id="junior" value="junior suite">
-              <label for="junior">Junior Suite</label>
+              <label for="junior">Junior</label>
               <input type="radio" name="roomType" id="suite" value="suite">
               <label for="suite">Suite</label>
               <input type="radio" name="roomType" id="residential" value="residential suite">
-              <label for="residential">Residential Suite</label>
+              <label for="residential">Residential</label>
             </div>
             <div>
-              <input type='number' class='num-bed' id="numBed" required min='1' max='2'>
+              <input type='number' class='num-bed' id="numBed" min='1' max='2'>
               <label for="numBed">Select number of beds</label>
             </div>
-            <p class="room-list hidden" id="roomList">rooms go here</p>
-            <button class="booking-submit" id="book-sub">submit</button>
+            <button class="booking-submit" id="bookSubTwo">submit</button>
           </form>
         </article>
         <article class="user-history card">
-          <div class="user-feild" single size="8" name="bookings" id="userFeild">
-            <p class="user-past" id="userPast"></p>
-            <p class="booking-area" id="bookingArea"></p>
-          </div>
+          <p class="user-past" id="userPast"></p>
+          <label for="bookingArea">Pick a Room</label>
+          <select class="user-feild" single size="14" name="bookings" id="bookingArea"></select>
           <div>
             <p class="cust-spent" id="custSpent">total customer spend</p>
           </div>
@@ -82,5 +87,7 @@
     </main>
   </body>
 </html>
+
+
 
     <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
