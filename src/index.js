@@ -19,14 +19,21 @@ const getCustomersData = fetch(customersUrl).then(response => response.json());
 const getRoomsData = fetch(roomsUrl).then(response => response.json());
 const getBookingsData = fetch(bookingsUrl).then(response => response.json());
 let user = null;
-let bookingRepo= [];
+let bookingRepo = [];
 let userRepo = [];
 let roomRepo = [];
-let todayDate = '2021/03/06';
+let workingRoomlist = [];
+let todaysDate = '2021/03/06';
 const headerName = document.getElementById('headerName');
 const userBookings = document.getElementById('userPast');
 const bookingArea = document.getElementById('bookingArea');
-const custSpent = document.getElementById('custSpent')
+const custSpent = document.getElementById('custSpent');
+const dateForm = document.getElementById('dateForm');
+const dateSub = document.getElementById('dateSub');
+const dateInput = document.getElementById('dateInput');
+const roomSelector = document.getElementById('roomSelector');
+const dateFor = document.getElementById('dateFor');
+const bookSubTwo = document.getElementById("bookSubTwo");
 // ---- fetch functions and page builds ----
 
 Promise.all([getRoomsData, getBookingsData, getCustomersData])
@@ -85,6 +92,83 @@ function updateCustomerSpent() {
   let spend = user.totalSpent(roomRepo);
   custSpent.innerText =`${user.name} total $${spend}`
 }
+
+function formDate(event) {
+  event.preventDefault();
+  let fixDate = dateInput.value
+  hide(dateFor);
+  unHide(roomSelector);
+  let roomlist = availableRooms(roomRepo.allRooms, fixDate);
+  displayRooms(roomlist, bookingArea);
+}
+
+function availableRooms(list, date = todaysDate) {
+  if (date < todaysDate) {
+    date = todaysDate;
+  }
+  let roomNum = bookingRepo.filterAvailableByDate(date, list);
+  roomRepo.updateRoomsAvailable(roomNum, roomRepo.allRooms);
+  let roomsToLoad = roomRepo.filterRooms(roomRepo.allRooms, 'available', true);
+  workingRoomlist = roomsToLoad;
+  return roomsToLoad;
+}
+
+function displayRooms(array, displayElemt) {
+  userBookings.innerText = `All the deals!`
+  custSpent.innerText =`Book today to save.`
+  displayElemt.innerHTML = ""
+  array.forEach(room => {
+    displayElemt.insertAdjacentHTML( 'afterbegin', `<option class="bookingList" id="${room.number}" value="default">Room ${room.number} with ${room.numBeds} ${room.bedSize} for $ ${room.costPerNight} a night.</option>`);
+  })
+}
+
+function formTwo() {
+  event.preventDefault();
+  let bedCount = document.getElementById('numBed');
+  let bidet = document.getElementById("bidet");
+  let test = document.querySelectorAll('input[type="radio"]');
+  let checkedTags = [];
+  test.forEach(tag => {
+    if (tag.checked) {
+      checkedTags.push(tag.value)
+    }
+  })
+  let filterOne = roomRepo.filterRooms(workingRoomlist, 'numBeds', bedCount.value * 1);
+  let filterTwo = roomRepo.filterRooms(filterOne, 'bedSize', checkedTags[0]);
+  let filterThree = roomRepo.filterRooms(filterTwo, 'bidet', bidet.checked);
+  displayRooms(filterThree, bookingArea);
+}
+
+function hide(element) {
+  element.classList.add('hidden')
+}
+
+function unHide(element) {
+  element.classList.remove('hidden')
+}
+
+// ---- Event Listeners ----
+
+dateSub.addEventListener('click', formDate);
+bookSubTwo.addEventListener('click', formTwo);
+
+
+
+
+// ---- nores ---
+
+
+
+// function checkTags() {
+//   var test = document.querySelectorAll('input[type="checkbox"]');
+//   let checkedTags = []
+//   test.forEach(tag => {
+//     if (tag.checked) {
+//       checkedTags.push(tag.name)
+//     }
+//   })
+//   return checkedTags
+// }
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 // import './images/turing-logo.png'
