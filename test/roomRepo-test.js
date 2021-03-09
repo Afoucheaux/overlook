@@ -55,7 +55,6 @@ describe('RoomRepo', function() {
       expect(roomRepo.filterRooms(roomRepo.allRooms, 'available', true).length).to.deep.equal(6);
     });
 
-
     it('Should be able to filter rooms by bidet', function() {
       expect(roomRepo.filterRooms(roomRepo.allRooms, 'bidet', true).length).to.deep.equal(4);
     });

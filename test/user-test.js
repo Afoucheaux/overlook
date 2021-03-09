@@ -15,18 +15,18 @@ describe('User', function() {
   let bookingRepo;
   let roomRepo;
 
-   beforeEach(() => {
-     bookingRepo = new BookingRepo;
-     roomRepo = new RoomRepo;
-     bookingsTestData.forEach(booking => {
-       let book = new Booking(booking);
-       bookingRepo.allBookings.push(book);
-     });
-     roomsTestData.forEach(roomList => {
-       let room = new Room(roomList);
-       roomRepo.allRooms.push(room);
-     });
-     user = new User(customersTestData[0]);
+  beforeEach(() => {
+    bookingRepo = new BookingRepo;
+    roomRepo = new RoomRepo;
+    bookingsTestData.forEach(booking => {
+      let book = new Booking(booking);
+      bookingRepo.allBookings.push(book);
+    });
+    roomsTestData.forEach(roomList => {
+      let room = new Room(roomList);
+      roomRepo.allRooms.push(room);
+    });
+    user = new User(customersTestData[0]);
    });
 
   it('Should be a function', function() {

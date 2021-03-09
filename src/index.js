@@ -1,8 +1,6 @@
-// This is the JavaScript entry file - your code begins here
-// Do not delete or rename this file ********
-// An example of how you tell webpack to use a CSS (SCSS) file
 import './css/styles.scss';
 import './css/base.scss';
+import './images/inn.jpg';
 import Booking from './Booking';
 import BookingRepo from './BookingRepo';
 import User from './User';
@@ -40,7 +38,7 @@ const currentType = document.getElementById('currentType');
 const price = document.getElementById('price');
 const bedCount = document.getElementById('numBed');
 const bidet = document.getElementById("bidet");
-const test = document.querySelectorAll('input[type="radio"]');
+const inputRadio = document.querySelectorAll('input[type="radio"]');
 const custPick = document.getElementById('custPick');
 const backDash = document.getElementById('backDash');
 const userDashboard = document.getElementById('userDashboard');
@@ -56,7 +54,7 @@ Promise.all([getRoomsData, getBookingsData, getCustomersData])
     buildRoomsData(values[0]);
     buildBookingData(values[1]);
     buildCustomersData(values[2]);
-})
+  })
 
 function buildRoomsData(roomsObj) {
   roomRepo = new RoomRepo();
@@ -81,7 +79,7 @@ function buildCustomersData(customersData) {
 
 function bookRoom() {
   let fixDate = workingDate.replaceAll("-", "/");
-  let newBooking = { "userID": user.id, "date": fixDate, "roomNumber":  currentRoom.number};
+  let newBooking = { "userID": user.id, "date": fixDate, "roomNumber": currentRoom.number};
   fetch(bookingsUrl, {
     method: 'POST',
     headers: {
@@ -95,10 +93,10 @@ function bookRoom() {
 }
 
 function userLogIn() {
-  let theUserName = userName.value
-  let theUserPassword = password.value
+  let theUserName = userName.value;
+  let theUserPassword = password.value;
   user = userRepo.allUsers.find(user => user.name === theUserName && user.password === theUserPassword);
-  if(user === null || user === undefined) {
+  if (user === null || user === undefined) {
     loginFail.innerText =`Login failed, please try again.`;
     return
   } else {
@@ -128,7 +126,7 @@ function updateCustomerSpent() {
   custSpent.innerText =`${user.name} total $${spend}`
 }
 
-function formDate(event) {
+function formDate() {
   let fixDate = dateInput.value;
   let dateTocheck = checkDate(fixDate);
   if (dateTocheck === false) {
@@ -165,6 +163,7 @@ function checkDate(date) {
     return false;
   } else {
     workingDate = date;
+    return date;
   }
 }
 
@@ -178,27 +177,34 @@ function displayRooms(array, displayElemt) {
 
 function message(array) {
   if (array.length === 0) {
-    userBookings.innerText =`We got nothing for you!`
-    custSpent.innerText =`Don't be so hard on us!`
+    userBookings.innerText = `We got nothing for you!`
+    custSpent.innerText = `Don't be so hard on us!`
   } else {
-    userBookings.innerText =`All the deals!`
-    custSpent.innerText =`Book today to save.`
+    userBookings.innerText = `All the deals!`
+    custSpent.innerText = `Book today to save.`
   }
 }
 
 function formTwo() {
-  // event.preventDefault();
+  const tags = checkEventTags()
+  console.log(tags)
+  let filterOne = roomRepo.filterRooms(workingRoomlist, 'numBeds', bedCount.value * 1);
+  let filterTwo = roomRepo.filterRooms(filterOne, 'bedSize', tags[0]);
+  let filterthree = roomRepo.filterRooms(filterTwo, 'bedSize', tags[1]);
+  let filterFour = roomRepo.filterRooms(filterthree, 'bidet', bidet.checked);
+  displayRooms(filterFour, bookingArea);
+}
+
+function checkEventTags() {
   let checkedTags = [];
-  test.forEach(tag => {
+  inputRadio.forEach(tag => {
     if (tag.checked) {
       checkedTags.push(tag.value)
     }
   })
-  let filterOne = roomRepo.filterRooms(workingRoomlist, 'numBeds', bedCount.value * 1);
-  let filterTwo = roomRepo.filterRooms(filterOne, 'bedSize', checkedTags[0]);
-  let filterThree = roomRepo.filterRooms(filterTwo, 'bidet', bidet.checked);
-  displayRooms(filterThree, bookingArea);
+  return checkedTags;
 }
+
 
 function moveToBookingCard(event) {
   let num = (event.target.id) * 1;
@@ -210,10 +216,10 @@ function moveToBookingCard(event) {
 }
 
 function addMainRoomMessage(room) {
-    unHide(loadRoom);
-    currentNum.innerText = `Book this ${room.roomType}.`;
-    currentType.innerText = `With ${room.numBeds} ${room.bedSize}.`;
-    price.innerText = `For only ${room.costPerNight} a night.`;
+  unHide(loadRoom);
+  currentNum.innerText = `Book this ${room.roomType}.`;
+  currentType.innerText = `With ${room.numBeds} ${room.bedSize}.`;
+  price.innerText = `For only ${room.costPerNight} a night.`;
 }
 
 function bookingMessage(booking) {
@@ -242,7 +248,7 @@ function unHide(element) {
 // ---- Event Listeners ----
 dateSub.addEventListener('click', formDate);
 bookSubTwo.addEventListener('click', formTwo);
-bookingArea.addEventListener('dblclick', moveToBookingCard);
+bookingArea.addEventListener('click', moveToBookingCard);
 custPick.addEventListener('click', bookRoom);
 backToDash.addEventListener('click', startFresh);
 logButton.addEventListener('click', userLogIn);

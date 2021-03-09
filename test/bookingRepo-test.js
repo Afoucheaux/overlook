@@ -40,7 +40,7 @@ describe('BookingRepo', function() {
       bookingRepo = new BookingRepo;
       bookingsTestData.forEach(bookingList => {
         let booking = new Booking(bookingList);
-       bookingRepo.allBookings.push(booking);
+        bookingRepo.allBookings.push(booking);
       });
     });
 

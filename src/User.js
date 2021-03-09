@@ -13,7 +13,7 @@ class User {
   totalSpent(roomlist) {
     let totalSpend = this.bookings.reduce((acc, booking) => {
       let room = roomlist.allRooms.find(romNum => romNum.number === booking.roomNumber);
-        acc += room.costPerNight;
+      acc += room.costPerNight;
       return acc
     }, 0)
     return totalSpend.toFixed(2);

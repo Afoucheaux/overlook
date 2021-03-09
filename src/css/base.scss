@@ -20,3 +20,7 @@ $secondary-button: #cf5959;
   margin: $margin;
   border-radius: 6px;
 }
+
+button:hover {
+  cursor: pointer;
+}
