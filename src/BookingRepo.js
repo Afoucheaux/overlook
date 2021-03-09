@@ -4,7 +4,8 @@ class BookingRepo {
   }
 
   filterAvailableByDate(dateLooking, bookingList) {
-    let byDate = bookingList.filter(booking => booking.date === dateLooking);
+    let fixDate = dateLooking.replaceAll("-", "/");
+    let byDate = bookingList.filter(booking => booking.date === fixDate);
     let numbList = byDate.map(book => book.roomNumber);
     return numbList;
   }

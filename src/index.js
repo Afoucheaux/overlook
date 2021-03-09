@@ -78,9 +78,6 @@ function buildCustomersData(customersData) {
 
 function bookRoom() {
   let fixDate = workingDate.replaceAll("-", "/");
-  console.log(user.id);
-  console.log(fixDate);
-  console.log(currentRoom.number)
   let newBooking = { "userID": user.id, "date": fixDate, "roomNumber": currentRoom.number};
   fetch(bookingsUrl, {
     method: 'POST',
@@ -153,8 +150,9 @@ function formDate() {
   }
 }
 
-function availableRooms(list, date = todaysDate) {
-  let roomNum = bookingRepo.filterAvailableByDate(date, list);
+function availableRooms(list, date) {
+  let roomNum = bookingRepo.filterAvailableByDate(date, bookingRepo.allBookings);
+  console.log("1:",roomNum);
   roomRepo.updateRoomsAvailable(roomNum, roomRepo.allRooms);
   let roomsToLoad = roomRepo.filterRooms(roomRepo.allRooms, 'available', true);
   workingRoomlist = roomsToLoad;
