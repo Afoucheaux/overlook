@@ -102,7 +102,7 @@ function serverDown(error) {
 function userLogIn() {
   let theUserName = userName.value;
   let theUserPassword = password.value;
-  user = userRepo.allUsers.find(user => user.name === theUserName && user.password === theUserPassword);
+  user = userRepo.allUsers.find(user => user.name.toUpperCase() === theUserName.toUpperCase() && user.password === theUserPassword);
   if (user === null || user === undefined) {
     loginFail.innerText = `Login failed, please try again.`;
     return
@@ -129,7 +129,8 @@ function buildDashboard() {
 function displayUserBookings(array, displayElemt) {
   displayElemt.innerHTML = ""
   array.forEach(booking => {
-    displayElemt.insertAdjacentHTML('afterbegin', `<option class="bookingList" id="${booking.id}" value="default">${booking.date} room ${booking.roomNumber}</option>`)
+    displayElemt.insertAdjacentHTML('afterbegin', `<option class="bookingList"
+    id="${booking.id}" value="default">${booking.date} room ${booking.roomNumber}</option>`)
   })
 }
 
@@ -183,7 +184,9 @@ function displayRooms(array, displayElemt) {
   message(array)
   displayElemt.innerHTML = ""
   array.forEach(room => {
-    displayElemt.insertAdjacentHTML('afterbegin', `<option class="bookingList" id="${room.number}" value="default">Room ${room.number} with ${room.numBeds} ${room.bedSize} for $ ${room.costPerNight} a night.</option>`);
+    displayElemt.insertAdjacentHTML('afterbegin', `<option class="bookingList"
+    id="${room.number}" value="default">Room ${room.number} with ${room.numBeds}
+    ${room.bedSize} for $ ${room.costPerNight} a night.</option>`);
   })
 }
 
@@ -193,7 +196,7 @@ function message(array) {
     custSpent.innerText = `Don't be so hard on us!`
   } else {
     userBookings.innerText = `All the deals!`
-    custSpent.innerText = `Book today to save.`
+    custSpent.innerText = `Book today to save!`
   }
 }
 
