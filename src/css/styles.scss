@@ -8,18 +8,19 @@
 }
 // --- deskTop ---
 
-// --- header ---
 body {
   background-color: $primary-color;
+  background-image: url('../images/inn.jpg');
+  background-size: 100%;
 }
-
+ // --- header ----
 header {
   position: absolute;
   top: 0;
   display: flex;
   background-color: $secondary-color;
   width: 100%;
-  height: 15vh;
+  height: 10vh;
 }
 
 .user-title {
@@ -38,7 +39,16 @@ header {
   justify-content: flex-start;
 }
 
+.titleText {
+  margin-left: 5%;
+}
+
  // --- login ---
+.layout-Loging-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .login-card {
   margin-top: 12%;
@@ -121,6 +131,13 @@ header {
   @include button(2% 15% 2% 15%, 0);
 }
 
+.back-to-dashboard {
+  font-size: .9em;
+  box-shadow: 2px 5px 5px 2px $cardShadow-color;
+  background-color: $secondary-color;
+  @include button(1% 12% 1% 12%, 0);
+}
+
 // ---- left card ---
 
 .load-Room {
@@ -129,19 +146,36 @@ header {
   align-items: center;
 }
 
-.cunstomer-picked {
+.customer-picked {
   @include button(2% 15% 2% 15%, 0);
   background-color: $secondary-color;
   box-shadow: 2px 5px 5px 2px $cardShadow-color;
 }
 
-
 // ---- right card ----
-
 .user-feild {
+  display: flex;
+  text-align: center;
+  border: none;
+  outline: none;
   margin: 5%;
   overflow: auto;
 }
+
+.user-feild option {
+  transition: all .2s ease-in-out;
+  cursor: pointer;
+}
+
+.user-feild option:hover {
+  transform: scale(1.05);
+}
+
+.user-feild option:visited {
+  text-decoration: underline;
+}
+
+
 
 .cust-spent {
   margin-bottom: 2%
@@ -154,7 +188,7 @@ header {
   bottom: 0;
   background-color: $secondary-color;
   width: 100%;
-  height: 12vh;
+  height: 10vh;
 }
 // tablet
 @media screen and (max-width: 925px) {

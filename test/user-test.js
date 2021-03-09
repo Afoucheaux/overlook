@@ -15,19 +15,19 @@ describe('User', function() {
   let bookingRepo;
   let roomRepo;
 
-   beforeEach(() => {
-     bookingRepo = new BookingRepo;
-     roomRepo = new RoomRepo;
-     bookingsTestData.forEach(booking => {
-       let book = new Booking(booking);
-       bookingRepo.allBookings.push(book);
-     });
-     roomsTestData.forEach(roomList => {
-       let room = new Room(roomList);
-       roomRepo.allRooms.push(room);
-     });
-     user = new User(customersTestData[0]);
-   });
+  beforeEach(() => {
+    bookingRepo = new BookingRepo;
+    roomRepo = new RoomRepo;
+    bookingsTestData.forEach(booking => {
+      let book = new Booking(booking);
+      bookingRepo.allBookings.push(book);
+    });
+    roomsTestData.forEach(roomList => {
+      let room = new Room(roomList);
+      roomRepo.allRooms.push(room);
+    });
+    user = new User(customersTestData[0]);
+  });
 
   it('Should be a function', function() {
     expect(User).to.be.a('function');
@@ -62,9 +62,9 @@ describe('User', function() {
   it('Should be able to see all their bookings', function() {
     user.findBookings(bookingRepo);
     expect(user.bookings).to.deep.equal([
-      {"id":"5fwrgu4i7k55hl6t5","userID":1,"date":"2020/01/24","roomNumber":1,"roomServiceCharges":[]},
-      {"id":"5fwrgu4i7k55hl6t6","userID":1,"date":"2020/01/10","roomNumber":2,"roomServiceCharges":[]},
-      {"id":"5fwrgu4i7k55hl6t7","userID":1,"date":"2020/02/16","roomNumber":3,"roomServiceCharges":[]}
+      { "id": "5fwrgu4i7k55hl6t5", "userID": 1, "date": "2020/01/24", "roomNumber": 1, "roomServiceCharges": []},
+      { "id": "5fwrgu4i7k55hl6t6", "userID": 1, "date": "2020/01/10", "roomNumber": 2, "roomServiceCharges": []},
+      { "id": "5fwrgu4i7k55hl6t7", "userID": 1, "date": "2020/02/16", "roomNumber": 3, "roomServiceCharges": []}
     ]);
   });
 

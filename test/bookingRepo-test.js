@@ -35,12 +35,12 @@ describe('BookingRepo', function() {
 
   describe('Booking filter', function() {
     let bookingRepo;
-    let roomRepo;
+
     beforeEach(() => {
       bookingRepo = new BookingRepo;
       bookingsTestData.forEach(bookingList => {
         let booking = new Booking(bookingList);
-       bookingRepo.allBookings.push(booking);
+        bookingRepo.allBookings.push(booking);
       });
     });
 

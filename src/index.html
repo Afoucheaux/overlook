@@ -12,34 +12,37 @@
   <body>
     <header>
       <section class="user-title">
-        <h2 class="name" id="headerName">User name</h2>
-        <h2 class="name hidden">Manager name</h2>
+        <h2 class="name hidden" id="headerName">user name</h2>
       </section>
       <section class="page-title">
-        <h1>Welcome to Overlook Inn</h1>
+        <h1 class="titleText">Welcome to Overlook Inn</h1>
       </section>
     </header>
-    <main >
-      <section class="login-card hidden" id="loginCard">
-        <form class="login-form">
-          <h3>login</h3>
-          <input type="text" class ="loging-input" id="userName" aria-label="add user name" placeholder="User Name">
-          <input type="text" class ="loging-input" id="password" aria-label="add user password" placeholder="Password">
-          <button type="button" name="login" id="logButton" arial-label="click to submit"></button>
-        </form>
-      </section>
-      <section class="user-dashboard">
+    <main>
+      <div class="layout-Loging-page">
+        <section class="login-card" id="loginCard">
+          <form class="login-form">
+            <h2 id="loginFail">login</h2>
+            <input type="text" class ="loging-input" id="userName" aria-label="add user name" placeholder="User Name" required>
+            <input type="text" class ="loging-input" id="password" aria-label="add user password" placeholder="Password" required>
+            <button type="button" class ="login-button" name="login" id="logButton" arial-label="click to submit">Log In</button>
+          </form>
+        </section>
+      </div>
+      <section class="user-dashboard hidden" id="userDashboard">
         <article class="search-room card">
           <div class="load-Room hidden" id="loadRoom">
             <p class="current-Num" id="currentNum"></p>
             <p class="current-Type" id="currentType"></p>
             <p class="price" id="price"></p>
-            <button class="cunstomer-picked" id="custPick">Book Today</button>
+            <button type="button" class="customer-picked" id="custPick">Book Today</button>
+            <button type="button" class="back-to-dashboard hidden" id="backToDash">Return to Dashboard</button>
           </div>
           <form class="user-booking-date" id="dateFor">
-            <label for="dateInput" class="date-select">Select a Date</label>
+            <label for="dateInput" class="date-select" id="dateHeader">Select a Date</label>
             <input type="date" class="date-input" id="dateInput" name="date" arial-label="input date">
-            <button class="booking-submit" id="dateSub">submit</button>
+            <button type="button" class="booking-submit" id="dateSub">submit</button>
+            <button type="button" class="back-to-dashboard hidden" id="backDash">Return to Dashboard</button>
           </form>
           <form class="room-selector hidden" id="roomSelector">
             <div>
@@ -70,7 +73,7 @@
               <input type='number' class='num-bed' id="numBed" min='1' max='2'>
               <label for="numBed">Select number of beds</label>
             </div>
-            <button class="booking-submit" id="bookSubTwo">submit</button>
+            <button type="button" class="booking-submit" id="bookSubTwo">submit</button>
           </form>
         </article>
         <article class="user-history card">
@@ -82,8 +85,7 @@
           </div>
         </article>
       </section>
-      <section class="footer">
-      </section>
+      <section class="footer"></section>
     </main>
   </body>
 </html>
