@@ -20,40 +20,44 @@ let userRepo = [];
 let roomRepo = [];
 let workingRoomlist = [];
 let workingDate = ''
-let todaysDate = '2021/03/06';
+let todaysDate = '2021/03/10';
 let currentRoom = {};
-const headerName = document.getElementById('headerName');
-const userBookings = document.getElementById('userPast');
-const bookingArea = document.getElementById('bookingArea');
-const custSpent = document.getElementById('custSpent');
-const dateSub = document.getElementById('dateSub');
-const dateInput = document.getElementById('dateInput');
-const roomSelector = document.getElementById('roomSelector');
-const dateFor = document.getElementById('dateFor');
-const bookSubTwo = document.getElementById('bookSubTwo');
-const loadRoom = document.getElementById('loadRoom');
-const currentNum = document.getElementById('currentNum');
-const currentType = document.getElementById('currentType');
-const price = document.getElementById('price');
+const backToDash = document.getElementById('backToDash');
 const bedCount = document.getElementById('numBed');
 const bidet = document.getElementById("bidet");
-const inputRadio = document.querySelectorAll('input[type="radio"]');
+const bookingArea = document.getElementById('bookingArea');
+const bookSubTwo = document.getElementById('bookSubTwo');
+const currentNum = document.getElementById('currentNum');
+const currentType = document.getElementById('currentType');
 const custPick = document.getElementById('custPick');
-const backToDash = document.getElementById('backToDash');
-const userDashboard = document.getElementById('userDashboard');
-const loginCard = document.getElementById('loginCard');
-const logButton = document.getElementById('logButton');
-const userName = document.getElementById('userName');
-const password = document.getElementById('password');
+const custSpent = document.getElementById('custSpent');
+const dateFor = document.getElementById('dateFor');
 const dateHeader = document.getElementById('dateHeader');
-const loginFail = document.getElementById('loginFail')
+const dateInput = document.getElementById('dateInput');
+const dateSub = document.getElementById('dateSub');
+const formStartFresh = document.getElementById('formStartFresh');
+const headerName = document.getElementById('headerName');
+const inputRadio = document.querySelectorAll('input[type="radio"]');
+const loadRoom = document.getElementById('loadRoom');
+const logButton = document.getElementById('logButton');
+const loginCard = document.getElementById('loginCard');
+const loginFail = document.getElementById('loginFail');
+const password = document.getElementById('password');
+const price = document.getElementById('price');
+const roomSelector = document.getElementById('roomSelector');
+const userBookings = document.getElementById('userPast');
+const userDashboard = document.getElementById('userDashboard');
+const userName = document.getElementById('userName');
 
-Promise.all([getRoomsData, getBookingsData, getCustomersData])
-  .then((values) => {
-    buildRoomsData(values[0]);
-    buildBookingData(values[1]);
-    buildCustomersData(values[2]);
-  })
+function getAllTheData() {
+  Promise.all([getRoomsData, getBookingsData, getCustomersData])
+    .then((values) => {
+      buildRoomsData(values[0]);
+      buildBookingData(values[1]);
+      buildCustomersData(values[2]);
+    })
+    .catch(error => serverDown(error))
+}
 
 function buildRoomsData(roomsObj) {
   roomRepo = new RoomRepo();
@@ -152,7 +156,6 @@ function formDate() {
 
 function availableRooms(list, date) {
   let roomNum = bookingRepo.filterAvailableByDate(date, bookingRepo.allBookings);
-  console.log("1:",roomNum);
   roomRepo.updateRoomsAvailable(roomNum, roomRepo.allRooms);
   let roomsToLoad = roomRepo.filterRooms(roomRepo.allRooms, 'available', true);
   workingRoomlist = roomsToLoad;
@@ -206,7 +209,6 @@ function formTwo() {
   displayRooms(filterThree, bookingArea);
 }
 
-
 function checkEventTags() {
   let checkedTags = [];
   inputRadio.forEach(tag => {
@@ -244,6 +246,7 @@ function bookingMessage(booking) {
 
 function startFresh() {
   hide(loadRoom);
+  hide(roomSelector);
   unHide(dateFor);
   userLogIn(user.name, user.password);
 }
@@ -256,18 +259,11 @@ function unHide(element) {
   element.classList.remove('hidden')
 }
 
-// ---- Event Listeners ----
+window.addEventListener('load', getAllTheData())
 dateSub.addEventListener('click', formDate);
 bookSubTwo.addEventListener('click', formTwo);
 bookingArea.addEventListener('click', moveToBookingCard);
 custPick.addEventListener('click', bookRoom);
 backToDash.addEventListener('click', startFresh);
 logButton.addEventListener('click', userLogIn);
-
-// ---- nores --- {
-
-
-
-
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
-// import './images/turing-logo.png'
+formStartFresh.addEventListener('click', startFresh);
