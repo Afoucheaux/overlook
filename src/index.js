@@ -26,7 +26,6 @@ const headerName = document.getElementById('headerName');
 const userBookings = document.getElementById('userPast');
 const bookingArea = document.getElementById('bookingArea');
 const custSpent = document.getElementById('custSpent');
-const dateForm = document.getElementById('dateForm');
 const dateSub = document.getElementById('dateSub');
 const dateInput = document.getElementById('dateInput');
 const roomSelector = document.getElementById('roomSelector');
@@ -40,15 +39,14 @@ const bedCount = document.getElementById('numBed');
 const bidet = document.getElementById("bidet");
 const inputRadio = document.querySelectorAll('input[type="radio"]');
 const custPick = document.getElementById('custPick');
-const backDash = document.getElementById('backDash');
+const backToDash = document.getElementById('backToDash');
 const userDashboard = document.getElementById('userDashboard');
 const loginCard = document.getElementById('loginCard');
-const logBullon = document.getElementById('logButton');
+const logButton = document.getElementById('logButton');
 const userName = document.getElementById('userName');
 const password = document.getElementById('password');
 const dateHeader = document.getElementById('dateHeader');
-const loginFail = document.getElementById('loginFail');
-const backToDashTwo = document.getElementById('backToDashTwo');
+const loginFail = document.getElementById('loginFail')
 
 Promise.all([getRoomsData, getBookingsData, getCustomersData])
   .then((values) => {
@@ -80,6 +78,9 @@ function buildCustomersData(customersData) {
 
 function bookRoom() {
   let fixDate = workingDate.replaceAll("-", "/");
+  console.log(user.id);
+  console.log(fixDate);
+  console.log(currentRoom.number)
   let newBooking = { "userID": user.id, "date": fixDate, "roomNumber": currentRoom.number};
   fetch(bookingsUrl, {
     method: 'POST',
@@ -93,7 +94,7 @@ function bookRoom() {
     .catch(error => serverDown(error))
 }
 
-function serverDown() {
+function serverDown(error) {
   currentNum.innerText = `Server Down.`;
   console.log(error);
 }
@@ -106,11 +107,15 @@ function userLogIn() {
     loginFail.innerText = `Login failed, please try again.`;
     return
   } else {
-    unHide(userDashboard);
-    user.findBookings(bookingRepo);
-    buildDashboard();
-    hide(loginCard);
+    buildLoginDash();
   }
+}
+
+function buildLoginDash() {
+  unHide(userDashboard);
+  user.findBookings(bookingRepo);
+  buildDashboard();
+  hide(loginCard);
 }
 
 function buildDashboard() {
@@ -194,12 +199,12 @@ function message(array) {
 
 function formTwo() {
   const tags = checkEventTags()
-  let filterOne = roomRepo.filterRooms(workingRoomlist, 'numBeds', bedCount.value * 1);
-  let filterTwo = roomRepo.filterRooms(filterOne, 'bedSize', tags[0]);
-  let filterthree = roomRepo.filterRooms(filterTwo, 'roomType', tags[1]);
-  let filterFour = roomRepo.filterRooms(filterthree, 'bidet', bidet.checked);
-  displayRooms(filterFour, bookingArea);
+  let filterOne = roomRepo.filterRooms(workingRoomlist, 'bidet', bidet.checked);
+  let filterTwo = roomRepo.filterRooms(filterOne, 'numBeds', bedCount.value * 1);
+  let filterThree = roomRepo.filterRooms(filterTwo, 'roomType', tags[0]);
+  displayRooms(filterThree, bookingArea);
 }
+
 
 function checkEventTags() {
   let checkedTags = [];
@@ -229,14 +234,14 @@ function addMainRoomMessage(room) {
 
 function bookingMessage(booking) {
   hide(custPick);
-  unHide(backToDashTwo);
+  unHide(backToDash);
   user.bookings.push(booking);
   currentNum.innerText = `You have reserved.`;
   currentType.innerText = `Room ${booking.roomNumber} on ${booking.date}.`;
   price.innerText = `Confirmation number ${booking.id}.`;
 }
 
-function startFresh(event) {
+function startFresh() {
   hide(loadRoom);
   unHide(dateFor);
   userLogIn(user.name, user.password);
