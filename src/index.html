@@ -36,28 +36,17 @@
             <p class="current-Type" id="currentType"></p>
             <p class="price" id="price"></p>
             <button type="button" class="customer-picked" id="custPick">Book Today</button>
-            <button type="button" class="back-to-dashboard hidden" id="backToDash">Return to Dashboard</button>
+            <button type="button" class="back-to-dashboard" id="backToDash">Back to Dashboard</button>
           </div>
           <form class="user-booking-date" id="dateFor">
             <label for="dateInput" class="date-select" id="dateHeader">Select a Date</label>
             <input type="date" class="date-input" id="dateInput" name="date" arial-label="input date">
             <button type="button" class="booking-submit" id="dateSub">submit</button>
-            <button type="button" class="back-to-dashboard hidden" id="backDash">Return to Dashboard</button>
           </form>
           <form class="room-selector hidden" id="roomSelector">
             <div>
               <input type="checkbox" name="bidet" id="bidet" value ="bidet">
               <label for="bidet">bidet</label>
-            </div>
-            <div>
-              <input type="radio" name="bed" id="twin" value="twin">
-              <label for="twin">Twin</label>
-              <input type="radio" name="bed" id="full" value="full">
-              <label for="full">Full</label>
-              <input type="radio" name="bed" id="queen" value="queen">
-              <label for="queen">Queen</label>
-              <input type="radio" name="bed" id="king" value="king">
-              <label for="king">King</label>
             </div>
             <div>
               <input type="radio" name="roomType" id="single" value="single room">
@@ -74,6 +63,7 @@
               <label for="numBed">Select number of beds</label>
             </div>
             <button type="button" class="booking-submit" id="bookSubTwo">submit</button>
+            <button type="button" class="back-to-dashboard" id="formStartFresh">Back to Dashboard</button>
           </form>
         </article>
         <article class="user-history card">
@@ -89,7 +79,3 @@
     </main>
   </body>
 </html>
-
-
-
-    <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
