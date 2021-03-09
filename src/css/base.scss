@@ -12,13 +12,14 @@ $secondary-button: #cf5959;
   justify-content: $justify-content;
   height: $height;
   width: $width;
+  opacity: 0.9;
 }
 
 @mixin button($padding, $margin) {
   border: 0;
   padding: $padding;
   margin: $margin;
-  border-radius: 6px;
+  border-radius: 6px
 }
 
 button:hover {

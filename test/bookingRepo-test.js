@@ -35,7 +35,7 @@ describe('BookingRepo', function() {
 
   describe('Booking filter', function() {
     let bookingRepo;
-    let roomRepo;
+
     beforeEach(() => {
       bookingRepo = new BookingRepo;
       bookingsTestData.forEach(bookingList => {

@@ -48,6 +48,7 @@ const userName = document.getElementById('userName');
 const password = document.getElementById('password');
 const dateHeader = document.getElementById('dateHeader');
 const loginFail = document.getElementById('loginFail');
+const backToDashTwo = document.getElementById('backToDashTwo');
 
 Promise.all([getRoomsData, getBookingsData, getCustomersData])
   .then((values) => {
@@ -89,7 +90,12 @@ function bookRoom() {
   })
     .then(response => response.json())
     .then(update => bookingMessage(update.newBooking))
-    .catch(error => console.log(error))
+    .catch(error => serverDown(error))
+}
+
+function serverDown() {
+  currentNum.innerText = `Server Down.`;
+  console.log(error);
 }
 
 function userLogIn() {
@@ -97,7 +103,7 @@ function userLogIn() {
   let theUserPassword = password.value;
   user = userRepo.allUsers.find(user => user.name === theUserName && user.password === theUserPassword);
   if (user === null || user === undefined) {
-    loginFail.innerText =`Login failed, please try again.`;
+    loginFail.innerText = `Login failed, please try again.`;
     return
   } else {
     unHide(userDashboard);
@@ -108,6 +114,7 @@ function userLogIn() {
 }
 
 function buildDashboard() {
+  unHide(headerName);
   headerName.innerText = user.name;
   userBookings.innerText = `${user.name} Bookings`
   displayUserBookings(user.bookings, bookingArea);
@@ -123,7 +130,7 @@ function displayUserBookings(array, displayElemt) {
 
 function updateCustomerSpent() {
   let spend = user.totalSpent(roomRepo);
-  custSpent.innerText =`${user.name} total $${spend}`
+  custSpent.innerText = `${user.name} total $${spend}`
 }
 
 function formDate() {
@@ -187,10 +194,9 @@ function message(array) {
 
 function formTwo() {
   const tags = checkEventTags()
-  console.log(tags)
   let filterOne = roomRepo.filterRooms(workingRoomlist, 'numBeds', bedCount.value * 1);
   let filterTwo = roomRepo.filterRooms(filterOne, 'bedSize', tags[0]);
-  let filterthree = roomRepo.filterRooms(filterTwo, 'bedSize', tags[1]);
+  let filterthree = roomRepo.filterRooms(filterTwo, 'roomType', tags[1]);
   let filterFour = roomRepo.filterRooms(filterthree, 'bidet', bidet.checked);
   displayRooms(filterFour, bookingArea);
 }
@@ -204,7 +210,6 @@ function checkEventTags() {
   })
   return checkedTags;
 }
-
 
 function moveToBookingCard(event) {
   let num = (event.target.id) * 1;
@@ -224,7 +229,7 @@ function addMainRoomMessage(room) {
 
 function bookingMessage(booking) {
   hide(custPick);
-  unHide(backToDash);
+  unHide(backToDashTwo);
   user.bookings.push(booking);
   currentNum.innerText = `You have reserved.`;
   currentType.innerText = `Room ${booking.roomNumber} on ${booking.date}.`;
