@@ -21,6 +21,8 @@
   * Run ```npm install```
   * Open in text editor
   * Read the README.md
+  * clone https://github.com/turingschool-examples/overlook-api
+  * cd into overlook-api and npm start
   * run the project on http://localhost:8080/
 
 ## Contributors
@@ -32,6 +34,13 @@
 * Create a login screen that verifies user password. Login to to a dash board that show a user their past booking and a total spent amount.
 Allows them to filter available room and book stays.
 
+#### Login.
+![Site Use](https://media.giphy.com/media/2F4oUAYpBc0eFTr93x/giphy.gif)
+
+
+#### User booking.
+![Site Use](https://media.giphy.com/media/3HOzvJBrPv1cTxLfKm/giphy.gif)
+
 
 ## Future Iterations
 
@@ -40,4 +49,4 @@ Allows them to filter available room and book stays.
  * Styling update.
  * Move more functionality from the index.js.
 
- ![](./overlook.gif)
+ 
